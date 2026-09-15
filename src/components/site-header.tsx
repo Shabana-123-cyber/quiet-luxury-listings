@@ -14,7 +14,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const tone = overlay ? "text-hero-foreground" : "text-foreground";
 
   return (
-    <header className={`z-50 w-full ${overlay ? "absolute inset-x-0 top-0" : "border-b border-border bg-background"}`}>
+    <header className={`z-50 w-full ${overlay ? "fixed inset-x-0 top-0 bg-primary/30 backdrop-blur-sm" : "sticky top-0 border-b border-border bg-background"}`}>
       <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 lg:px-8">
         <Link to="/" className={`flex min-w-0 items-center gap-3 ${tone}`} aria-label="Aurelia Estates home">
           <span className="grid h-9 w-9 shrink-0 place-items-center border border-current font-display text-lg">A</span>
