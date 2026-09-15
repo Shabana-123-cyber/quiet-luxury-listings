@@ -10,33 +10,44 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PropertiesCoastalResidenceRouteImport } from './routes/properties.coastal-residence'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PropertiesCoastalResidenceRoute =
+  PropertiesCoastalResidenceRouteImport.update({
+    id: '/properties/coastal-residence',
+    path: '/properties/coastal-residence',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/properties/coastal-residence': typeof PropertiesCoastalResidenceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/properties/coastal-residence': typeof PropertiesCoastalResidenceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/properties/coastal-residence': typeof PropertiesCoastalResidenceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/properties/coastal-residence'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/properties/coastal-residence'
+  id: '__root__' | '/' | '/properties/coastal-residence'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PropertiesCoastalResidenceRoute: typeof PropertiesCoastalResidenceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +59,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/properties/coastal-residence': {
+      id: '/properties/coastal-residence'
+      path: '/properties/coastal-residence'
+      fullPath: '/properties/coastal-residence'
+      preLoaderRoute: typeof PropertiesCoastalResidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PropertiesCoastalResidenceRoute: PropertiesCoastalResidenceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
