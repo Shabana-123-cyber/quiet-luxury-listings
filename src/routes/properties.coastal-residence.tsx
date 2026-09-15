@@ -31,6 +31,7 @@ const gallery = [
 function PropertyDetail() {
   const [activeImage, setActiveImage] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const activePhoto = gallery[activeImage] ?? gallery[0];
 
   function moveGallery(direction: number) {
     setActiveImage((current) => (current + direction + gallery.length) % gallery.length);
@@ -50,7 +51,7 @@ function PropertyDetail() {
       <section className="relative bg-primary">
         <div className="mx-auto max-w-[1600px]">
           <div className="relative aspect-[16/10] max-h-[76vh] min-h-[420px] overflow-hidden sm:aspect-[16/8]">
-            <img src={gallery[activeImage].src} alt={gallery[activeImage].alt} width={1920} height={1200} className="h-full w-full object-cover" />
+            {activePhoto && <img src={activePhoto.src} alt={activePhoto.alt} width={1920} height={1200} className="h-full w-full object-cover" />}
             <div className="absolute bottom-5 right-5 flex gap-2">
               <Button variant="outline" className="h-12 w-12 border-0 bg-background/90 p-0" onClick={() => moveGallery(-1)} aria-label="Previous photo"><ChevronLeft size={20} /></Button>
               <Button variant="outline" className="h-12 w-12 border-0 bg-background/90 p-0" onClick={() => moveGallery(1)} aria-label="Next photo"><ChevronRight size={20} /></Button>
